@@ -1,0 +1,11 @@
+{
+  "name": "nodejs_project-api-01",
+  "version": "1.0.0",
+  "description": "Aplicacion NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Seb_RM",
+  "license": "ISC"
+}

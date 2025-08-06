@@ -1,9 +1,10 @@
 {
   "name": "nodejs_project-api-01",
   "version": "1.0.0",
-  "description": "Aplicacion NodeJS",
+  "description": "Aplicación NodeJS",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Seb_RM",

@@ -1,4 +1,5 @@
 const faker = require("faker");
+const boom = require("@hapi/boom");
 
 const getAllProducts = async (req) => {
     try {
@@ -33,6 +34,9 @@ const createNewProduct = async (req) => {
 const updateProduct = async (req) => {
     try {
         const { id } = req.params;
+        // if (id != 1) {
+        //     throw boom.notFound("No encontrado.");
+        // }
         const body = req.body;
         return {
             message: "success",
@@ -40,6 +44,7 @@ const updateProduct = async (req) => {
             id,
         };
     } catch (error) {
+        console.log(error)
         throw new Error("Error al actualizar producto");
     }
 };
@@ -59,6 +64,9 @@ const deleteProduct = async (req) => {
 const getOneProduct = async (req) => {
     try {
         const { id } = req.params;
+        if (id != 1) {
+            throw boom.notFound("No encontrado.");
+        }
         return {
             id: id,
             name: "Teclado",

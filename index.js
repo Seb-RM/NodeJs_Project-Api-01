@@ -1,9 +1,11 @@
 const express = require("express");
 const apiRouter = require("./server");
+const cors = require("cors");
 const { errorLogs, handlerError } = require("./middleware/error.handler");
 const app = express();
 const port = 3000;
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/',(req, res)=> {

@@ -218,3 +218,6 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,linux,macos
 
 docker-compose*.yml
+docker-compose.yml
+
+postgres_data

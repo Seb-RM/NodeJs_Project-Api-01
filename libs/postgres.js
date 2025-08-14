@@ -1,12 +1,18 @@
 const { Pool } = require("pg");
+const { config } = require("../config/config");
+
+const USER = encodeURIComponent(config.dbUser);
+const PASSWORD = encodeURIComponent(config.dbPassword);
+console.log(config);
+const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
 
 // async function getConnection() {
 //     const client = new pg.Client({
-//         host: "localhost",
-//         port: "5432",
-//         user: "admin",
-//         password: "admin1234",
-//         database: "my_api",
+//         host: "",
+//         port: "",
+//         user: "",
+//         password: "",
+//         database: "",
 //     });
 //     await client.connect();
 //     return client;
@@ -14,12 +20,14 @@ const { Pool } = require("pg");
 
 // module.exports = getConnection;
 
-const pool = new Pool({
-    host: "localhost",
-    port: 5432,
-    user:"admin",
-    password: "admin1234",
-    database: "my_api"
-});
+
+// const pool = new Pool({
+//     host: "localhost",
+//     port: ,
+//     user:"",
+//     password: "",
+//     database: ""
+// });
+const pool = new Pool({ connectionString: URI });
 
 module.exports = {pool};

@@ -22,4 +22,4 @@ const pool = new Pool({
     database: "my_api"
 });
 
-module.exports = pool;
+module.exports = {pool};

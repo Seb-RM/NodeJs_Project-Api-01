@@ -1,5 +1,5 @@
 // const getConnection = require("../libs/postgres");
-const pool = require("../libs/postgres");
+const {pool} = require("../libs/postgres");
 
 // const getAllUsers = async (req) => {
 //     try {
@@ -18,9 +18,14 @@ const pool = require("../libs/postgres");
 // };
 
 const getAllUsers = async (req, res) => {
-    const client = await pool();
-    const response = await client.query('SELECT * FROM tasks');
-    return response.rows;
+    try {
+        const query = "SELECT * FROM tasks";
+        const response = await pool.query(query);
+        return response.rows;
+    } catch (error) {
+        console.log(error)
+    }
+    
 }
 
 module.exports = {getAllUsers};

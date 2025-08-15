@@ -1,4 +1,4 @@
-const { Model, DataType, Sequelize, INTEGER } = require("sequelize");
+const { Model, DataTypes, Sequelize } = require("sequelize");
 
 const USER_TABLE = "users";
 
@@ -7,20 +7,20 @@ const UserSchema = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataType.INTEGER
+        type: DataTypes.INTEGER
     },
     email: {
         allowNull: false,
-        type: DataType.STRING,
+        type: DataTypes.STRING,
         unique: true
     },
     password: {
         allowNull: false,
-        type: DataType.STRING
+        type: DataTypes.STRING
     },
     createAt: {
         allowNull: false,
-        type: DataType.DATE,
+        type: DataTypes.DATE,
         field: "created_at",
         defaultValue: Sequelize.NOW
     }

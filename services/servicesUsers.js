@@ -27,12 +27,26 @@ const { models } = require("../libs/sequelize");
 //     } catch (error) {
 //         console.log(error)
 //     }
-    
+
 // }
 
-const getAllUsers = async (req, res) => {
-    const response = await models.User.findAll()
+const getAllUsers = async () => {
+    const response = await models.User.findAll();
     return response
+}
+
+const findOne = async (id) => {
+    try {
+        const user = await models.User.findByPk(id);
+        if (!user) {
+            return {
+                error: "User not found.",
+            };
+        }
+        return user;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const createUser = async (body) => {
@@ -47,10 +61,10 @@ const createUser = async (body) => {
     }
 };
 
-const updateUser = async ({id, body}) => {
+const updateUser = async ({ id, body }) => {
     try {
         const user = await models.User.findByPk(id);
-        if(!user) {
+        if (!user) {
             return {
                 error: "User not found."
             }
@@ -65,7 +79,7 @@ const updateUser = async ({id, body}) => {
 const deleteUser = async (id) => {
     try {
         const user = await models.User.findOne(id);
-        if(!user) {
+        if (!user) {
             return {
                 error: "User not found."
             }

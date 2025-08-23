@@ -19,7 +19,8 @@
     "eslint-plugin-prettier": "^5.5.3",
     "mocha": "^11.7.1",
     "nodemon": "^3.1.10",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "sequelize-cli": "^6.6.3"
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",

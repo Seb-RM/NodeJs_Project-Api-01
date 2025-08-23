@@ -1,5 +1,7 @@
 const express = require("express");
 const serviceUsers = require("../services/servicesUsers");
+const  { createUserSchema, updateUserSchema, getUserSchema} = require("../schema/schemeUsers");
+const validatorHandler = require("../middleware/validator.handler");
 
 const router = express.Router();
 
@@ -21,7 +23,8 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", validatorHandler(getUserSchema, "params"),
+    async (req, res, next) => {
     try {
         const { id } = req.params;
         const oneUser = await serviceUsers.findOne(id);
@@ -32,7 +35,8 @@ router.get("/:id", async (req, res, next) => {
 });
 
 
-router.post("/", async (req, res, next) => {
+router.post("/", validatorHandler(createUserSchema, "body"),
+    async (req, res, next) => {
     try {
         const body = req.body;
         const newUser = await serviceUsers.createUser(body);
@@ -42,7 +46,8 @@ router.post("/", async (req, res, next) => {
     }
 });
 
-router.patch("/:id", async (req, res, next) => {
+router.patch("/:id", validatorHandler(updateUserSchema, "params"),
+    async (req, res, next) => {
     try {
         const { id } = req.params;
         const body = req.body;

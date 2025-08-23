@@ -7,7 +7,9 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "lint": "eslint",
-    "test": "mocha"
+    "test": "mocha",
+    "migrations:generate": "sequelize-cli migration:generate --name"
+
   },
   "author": "Seb_RM",
   "license": "ISC",

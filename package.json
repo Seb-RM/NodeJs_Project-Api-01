@@ -8,7 +8,10 @@
     "start": "node index.js",
     "lint": "eslint",
     "test": "mocha",
-    "migrations:generate": "sequelize-cli migration:generate --name"
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run": "sequelize-cli db:migrate",
+    "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:undo:all"
 
   },
   "author": "Seb_RM",

@@ -222,3 +222,4 @@ docker-compose.yml
 
 postgres_data
 mysql_data
+db/config.js

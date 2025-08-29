@@ -18,7 +18,7 @@ const UserSchema = {
         allowNull: false,
         type: DataTypes.STRING
     },
-    role:{
+    role: {
         allowNull: false,
         type: DataTypes.STRING,
         defaultValue: "client"
@@ -32,18 +32,20 @@ const UserSchema = {
 };
 
 class User extends Model {
-    static associate() {
-
-    };
+    static associate(models) {
+        this.hasOne(models.Client, {
+            as: "client",
+            foreignKey: "userId",
+        });
+    }
     static config(sequelize) {
         return {
             sequelize,
             tableName: USER_TABLE,
             modelName: "User",
-            timestamps: false
-
-        }
-    };
+            timestamps: false,
+        };
+    }
 };
 
 module.exports = {

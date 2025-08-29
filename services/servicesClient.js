@@ -1,6 +1,7 @@
 const { boom } = require('@hapi/boom')
 // const getConnection = require('../libs/postgres')
 const { models } = require('../libs/sequelize')
+const { Client } = require("../db/models/client.model");
 
 
 const getClients = async () => {
@@ -24,11 +25,18 @@ const findOne = async (id) => {
 const createClient = async (body) => {
   try {
     console.log(body)
-    const newClient = await models.Client.create(body)
-    console.log(newClient)
-    return newClient
+    const existingClient = await Client.findOne({
+      where: { userId: body.userId },
+    });
+    if (existingClient) {
+      throw new Error("Ya existe un cliente para este usuario");
+    }
+    return await Client.create(body);
   } catch (error) {
-    console.log(error)
+    if (error.name === "SequelizeUniqueConstraintError") {
+      error.message = "Ya existe un cliente asociado a este usuario";
+    }
+    throw error;
   }
 }
 

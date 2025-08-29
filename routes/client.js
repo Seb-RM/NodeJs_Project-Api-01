@@ -41,7 +41,6 @@ router.post('/', validatorHandler(createClientSchema, 'body'),
         message: "Cliente creado exitosamente",
         data: newClient,
       });
-      return { newClient }
     } catch (error) {
       next(error)
     }

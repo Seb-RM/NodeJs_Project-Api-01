@@ -5,7 +5,9 @@ const { Client } = require("../db/models/client.model");
 
 
 const getClients = async () => {
-  const response = await models.Client.findAll()
+  const response = await models.Client.findAll(
+    {include: ["User"]}
+  );
   return response
 }
 

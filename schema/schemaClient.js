@@ -13,10 +13,14 @@ const getClientSchema = Joi.object({
 });
 
 const createClientSchema = Joi.object({
-  name: Joi.string().required(),
-  lastName: Joi.string().required(),
-  phone: Joi.string().required(),
-  userId: Joi.number().integer().required(),
+  name: name.required(),
+  lastName: lastName.required(),
+  phone: phone.required(),
+  // userId: Joi.number().integer().required(),
+  user: Joi.object({
+    email: email.required(),
+    password:password.required()
+  })
 });
 
 const updateClientSchema = Joi.object({

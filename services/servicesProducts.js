@@ -1,81 +1,89 @@
-const faker = require("faker");
-const boom = require("@hapi/boom");
+// const faker = require("faker");
+// const boom = require("@hapi/boom");
 
-const getAllProducts = async (req) => {
-    try {
-        const products = [];
-        const { size } = req.query;
-        const limit = size || 5;
-        for (let index = 0; index < limit; index++) {
-            products.push({
-                name: faker.commerce.productName(),
-                price: parseInt(faker.commerce.price(), 10),
-                image: faker.image.imageUrl(),
-            });
-        }
-        return products;
-    } catch (error) {
-        throw new Error("Error al obtener productos");
-    }
-};
+const sequelize = require("../libs/sequelize");
+const { models } = require("../libs/sequelize");
 
-const createNewProduct = async (req) => {
+// const getAllProducts = async (req) => {
+//     try {
+//         const products = [];
+//         const { size } = req.query;
+//         const limit = size || 5;
+//         for (let index = 0; index < limit; index++) {
+//             products.push({
+//                 name: faker.commerce.productName(),
+//                 price: parseInt(faker.commerce.price(), 10),
+//                 image: faker.image.imageUrl(),
+//             });
+//         }
+//         return products;
+//     } catch (error) {
+//         throw new Error("Error al obtener productos");
+//     }
+// };
+
+const getAllProducts = async () => {
     try {
-        const body = req.body;
+        const data = await models.Product.findAll({
+            include: ["category"],
+        });
         return {
-            ok: true,
-            data: body,
+            data,
         };
     } catch (error) {
-        throw new Error("Error al crear producto");
+        console.log(error);
     }
 };
 
-const updateProduct = async (req) => {
+const createNewProduct = async (body) => {
     try {
-        const { id } = req.params;
-        // if (id != 1) {
-        //     throw boom.notFound("No encontrado.");
-        // }
-        const body = req.body;
+        console.log(body);
+        const newCategory = await models.Product.create(body);
+        return newCategory;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const updateProduct = async (id, body) => {
+    try {
+        const category = await models.Product.findByPk(id);
+        if (!category) {
+            return {
+                error: "category not found",
+            };
+        }
+        const response = await category.update(body);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const deleteProduct = async (id) => {
+    try {
+        const category = await models.Product.findByPk(id);
+        await category.destroy();
         return {
-            message: "success",
-            product: body,
+            message: "category delete",
             id,
         };
     } catch (error) {
-        console.log(error)
-        throw new Error("Error al actualizar producto");
+        console.log(error);
     }
 };
 
-const deleteProduct = async (req) => {
+const getOneProduct = async (id) => {
     try {
-        const { id } = req.params;
-        return {
-            message: "delete",
-            id,
-        };
-    } catch (error) {
-        throw new Error("Error al eliminar producto");
-    }
-};
-
-const getOneProduct = async (req) => {
-    try {
-        const { id } = req.params;
-        if (id != 1) {
-            throw boom.notFound("No encontrado.");
+        const product = await models.Product.findByPk(id);
+        if (!product) {
+            return {
+                message: "product not found",
+            };
         }
-        return {
-            id: id,
-            name: "Teclado",
-            price: 2000,
-            category: "technology",
-            stock: 10,
-        };
+        return product;
     } catch (error) {
-        throw new Error("Error al obtener producto");
+        console.log(error);
     }
 };
 

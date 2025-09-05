@@ -128,16 +128,20 @@ Este fragmento muestra cómo se generan productos de ejemplo y se maneja el erro
 ## 🧩 Otras secciones útiles
 
 ### 🔒 Seguridad
+
 - No subas tu archivo `.env` al repositorio.  
 - Usa contraseñas seguras y cambia las de ejemplo.  
 
 ### 🐳 Docker
+
 - Los contenedores de base de datos persisten datos en las carpetas `postgres_data` y `mysql_data`.  
 - Puedes administrar la base de datos con **PgAdmin** y **PhpMyAdmin** incluidos en el `docker-compose.yml`.  
 
 ### 🧪 Testing
+
 - Incluye pruebas end-to-end en la carpeta `test/`.  
 
 ### 📚 Documentación adicional
+
 - Revisa los comentarios en el código para entender la lógica de cada módulo.  
 - Consulta la documentación oficial de cada dependencia para ampliar conocimientos.  
